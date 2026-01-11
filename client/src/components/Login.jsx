@@ -22,7 +22,7 @@ const Login = () => {
             
 
             if(state === 'Login'){
-              const {data} = await axios.post(backendUrl + '/api/user/login', 
+              const {data} = await axios.post('https://imagify-hwiy.onrender.com/api/user/login', 
                     { email, password })
 
                     if(data.success){
@@ -35,7 +35,7 @@ const Login = () => {
                     }
 
             }else {
-                const {data} = await axios.post(backendUrl + '/api/user/register', 
+                const {data} = await axios.post('https://imagify-hwiy.onrender.com/api/user/register', 
                     { name, email, password })
 
                     if(data.success){

@@ -25,7 +25,7 @@ const BuyCredit = () => {
       handler: async (response) => {
         try {
           
-          const {data} = await axios.post(backendUrl + '/api/user/verify-razor', response, {headers: {token}})
+          const {data} = await axios.post('https://imagify-hwiy.onrender.com/api/user/verify-razor', response, {headers: {token}})
           if (data.success) {
             loadCreditsData();
             navigate('/')

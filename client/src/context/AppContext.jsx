@@ -17,12 +17,12 @@ const AppContextProvider = ( props ) => {
     if (!backendUrl) {
       console.warn("Backend URL is missing in env");
     }
-    
+
     const navigate = useNavigate()
 
     const loadCreditsData = async () =>{
         try {
-            const {data} = await axios.get(backendUrl + '/api/user/credits', { headers: {token}})
+            const {data} = await axios.get('https://imagify-hwiy.onrender.com/api/user/credits', { headers: {token}})
 
             if(data.success){
                 setCredit(data.credits)
@@ -36,7 +36,7 @@ const AppContextProvider = ( props ) => {
 
     const generateImage = async (prompt) => {
         try {
-           const {data} = await axios.post(backendUrl + '/api/image/generate-image', { prompt }, {headers: {token}})
+           const {data} = await axios.post('https://imagify-hwiy.onrender.com/api/image/generate-image', { prompt }, {headers: {token}})
 
            if(data.success){
             loadCreditsData()
