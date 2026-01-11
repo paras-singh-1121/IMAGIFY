@@ -13,7 +13,11 @@ const AppContextProvider = ( props ) => {
 
     const [credit, setCredit] = useState(false)
     const backendUrl = import.meta.env.VITE_BACKEND_URL
-
+   
+    if (!backendUrl) {
+      console.warn("Backend URL is missing in env");
+    }
+    
     const navigate = useNavigate()
 
     const loadCreditsData = async () =>{
