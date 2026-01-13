@@ -6,10 +6,11 @@ import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import axios from 'axios'
+import { axiosInstance } from '../lib/axios'
 
 const BuyCredit = () => {
 
-  const {user, backendUrl, loadCreditsData, token, setShowLogin} = useContext(AppContext)
+  const {user, loadCreditsData, token, setShowLogin} = useContext(AppContext)
 
   const navigate = useNavigate()
 
@@ -25,7 +26,7 @@ const BuyCredit = () => {
       handler: async (response) => {
         try {
           
-          const {data} = await axios.post('https://imagify-hwiy.onrender.com/api/user/verify-razor', response, {headers: {token}})
+          const {data} = await axiosInstance.post('/user/verify-razor', response, {headers: {token}})
           if (data.success) {
             loadCreditsData();
             navigate('/')
@@ -46,7 +47,7 @@ const BuyCredit = () => {
         setShowLogin(true)
       }
 
-      const {data} = await axios.post(backendUrl + '/api/user/pay-razor', { planId }, {headers: {token}} )
+      const {data} = await axiosInstance.post('/user/pay-razor', { planId }, {headers: {token}} )
 
       if (data.success) {
         initPay(data.order)

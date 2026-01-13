@@ -3,13 +3,14 @@ import React, { useContext, useEffect, useState } from 'react'
 import { assets } from '../assets/assets'
 import { AppContext } from '../context/AppContext'
 import { motion } from 'framer-motion'
-import axios from 'axios'
+// import axios from 'axios'
 import { toast } from 'react-toastify'
+import { axiosInstance } from '../lib/axios'
 
 const Login = () => {
 
     const [state, setState] = useState('Login')
-    const {setShowLogin, backendUrl, setToken, setUser} = useContext(AppContext)
+    const {setShowLogin, setToken, setUser} = useContext(AppContext)
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
@@ -22,7 +23,7 @@ const Login = () => {
             
 
             if(state === 'Login'){
-              const {data} = await axios.post('https://imagify-hwiy.onrender.com/api/user/login', 
+              const {data} = await axiosInstance.post('/user/login', 
                     { email, password })
 
                     if(data.success){
@@ -35,7 +36,7 @@ const Login = () => {
                     }
 
             }else {
-                const {data} = await axios.post('https://imagify-hwiy.onrender.com/api/user/register', 
+                const {data} = await axiosInstance.post('/api/user/register', 
                     { name, email, password })
 
                     if(data.success){

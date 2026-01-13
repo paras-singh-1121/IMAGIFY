@@ -1,7 +1,8 @@
 import { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import axios from "axios";
+// import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { axiosInstance } from "../lib/axios";
 
 export const AppContext = createContext()
 
@@ -12,17 +13,14 @@ const AppContextProvider = ( props ) => {
 
 
     const [credit, setCredit] = useState(false)
-    const backendUrl = import.meta.env.VITE_BACKEND_URL
+    // const backendUrl = import.meta.env.VITE_BACKEND_URL
    
-    if (!backendUrl) {
-      console.warn("Backend URL is missing in env");
-    }
 
     const navigate = useNavigate()
 
     const loadCreditsData = async () =>{
         try {
-            const {data} = await axios.get('https://imagify-hwiy.onrender.com/api/user/credits', { headers: {token}})
+            const {data} = await axiosInstance.get('/user/credits', { headers: {token}})
 
             if(data.success){
                 setCredit(data.credits)
@@ -36,7 +34,7 @@ const AppContextProvider = ( props ) => {
 
     const generateImage = async (prompt) => {
         try {
-           const {data} = await axios.post('https://imagify-hwiy.onrender.com/api/image/generate-image', { prompt }, {headers: {token}})
+           const {data} = await axiosInstance.post('/image/generate-image', { prompt }, {headers: {token}})
 
            if(data.success){
             loadCreditsData()
@@ -67,7 +65,7 @@ const AppContextProvider = ( props ) => {
     },[token])
 
     const value = {
-        user, setUser, showLogin, setShowLogin, backendUrl, token, setToken, credit, setCredit, loadCreditsData, logout, generateImage
+        user, setUser, showLogin, setShowLogin, token, setToken, credit, setCredit, loadCreditsData, logout, generateImage
     }
 
     return (
