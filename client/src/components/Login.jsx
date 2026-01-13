@@ -36,7 +36,7 @@ const Login = () => {
                     }
 
             }else {
-                const {data} = await axiosInstance.post('/api/user/register', 
+                const {data} = await axiosInstance.post('/user/register', 
                     { name, email, password })
 
                     if(data.success){
