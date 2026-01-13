@@ -10,13 +10,14 @@ import { axiosInstance } from '../lib/axios'
 
 const BuyCredit = () => {
 
-  const {user, loadCreditsData, token, setShowLogin} = useContext(AppContext)
+  const {user, loadCreditsData, token, setShowLogin, razorpayKeyId } = useContext(AppContext)
 
   const navigate = useNavigate()
 
   const initPay = async (order) => {
     const options ={
-      key: import.meta.env.VITE_RAZORPAY_KEY_ID,
+      // key: import.meta.env.VITE_RAZORPAY_KEY_ID,
+      key: razorpayKeyId,
       amount: order.amount,
       currency: order.currency,
       name: "Credits Payment",

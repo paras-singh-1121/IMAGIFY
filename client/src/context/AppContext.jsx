@@ -14,7 +14,8 @@ const AppContextProvider = ( props ) => {
 
     const [credit, setCredit] = useState(false)
     // const backendUrl = import.meta.env.VITE_BACKEND_URL
-   
+
+    const razorpayKeyId = 'rzp_test_S2Cl4m5SgYrXVA'
 
     const navigate = useNavigate()
 
@@ -65,7 +66,7 @@ const AppContextProvider = ( props ) => {
     },[token])
 
     const value = {
-        user, setUser, showLogin, setShowLogin, token, setToken, credit, setCredit, loadCreditsData, logout, generateImage
+        user, setUser, showLogin, setShowLogin, token, setToken, credit, setCredit, loadCreditsData, logout, generateImage, razorpayKeyId
     }
 
     return (
